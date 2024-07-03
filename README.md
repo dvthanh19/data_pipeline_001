@@ -11,6 +11,10 @@
 - Create file *pom.xml*
 - Create *file_schema.proto*
 
+Run the docker up for Kafka broker and UI
+```shell
+docker compose -f docker-compose.yml -p demo up -d
+```
 
 Run the command
 ```shell

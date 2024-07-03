@@ -14,6 +14,70 @@ import java.util.HashMap;
 
 
 public class CheckMD5 {
+  public static void main(String[] args) throws IOException, NoSuchAlgorithmException {
+    
+  }
+
+  public static void checkMD5() throws IOException, NoSuchAlgorithmException 
+  {
+    String hashFilePath = "./target/MD5_file.ser";
+    String checkPath = "D:\\dir_client\\";
+    File dir = new File(checkPath);
+    HashMap<String, String> loadedMap = null;
+    
+    try {
+      loadedMap = readFromSerializedFile(hashFilePath);
+      if (loadedMap != null) {
+        // System.out.println("Loaded HashMap:");
+        // for (String key : loadedMap.keySet()) {
+        //   System.out.println("\t" + key + ": " + loadedMap.get(key));
+        // }
+      } else {
+        System.err.println("Error: HashMap might be null.");
+      }
+    } catch (IOException e) {
+      System.err.println("Error reading file: " + e.getMessage());
+    } catch (ClassNotFoundException e) {
+      System.err.println("Error: Class not found during deserialization: " + e.getMessage());
+    }
+
+    
+    
+
+    if (dir.exists() && dir.isDirectory()) {
+      String[] files = dir.list();
+      if (files != null) {
+        for (String file : files) {
+          File filePath = new File(checkPath + file);
+          if (!filePath.isDirectory())
+          {            
+            String refHash = loadedMap.get(file);
+            // System.out.println(file + ": " + refHash);
+            if (refHash == null){
+              System.out.println("File <" + file + "> was added.");
+            }
+            else
+            {
+              if (!checkFileIntegrity(checkPath + file, refHash)) {
+                System.out.println("File <" + file + "> was modified.");
+              }
+              else {
+                System.out.println("File <" + file + "> is up to date.");
+              } 
+            }
+          }
+        }
+      } else {
+        System.out.println("No files found in the directory.");
+      }
+    } else {
+      System.err.println("Error: Directory not found or not a directory: " + checkPath);
+    }
+  }
+
+
+
+  
   public static String getMD5Hash(String filePath) throws IOException, NoSuchAlgorithmException {
     MessageDigest md = MessageDigest.getInstance("MD5");
     try (FileInputStream fis = new FileInputStream(filePath)) {
@@ -42,11 +106,6 @@ public class CheckMD5 {
     File file = new File(path);
     return file.exists() && (file.isFile() || file.isDirectory());
   }
-  
-  public static boolean isFile(String path) {
-    File file = new File(path);
-    return file.exists() && file.isFile();
-  }
 
   public static void writeToSerializedFile(HashMap<String, String> map, String filePath) throws IOException {
     try (
@@ -64,74 +123,5 @@ public class CheckMD5 {
     }
   }
 
-  public static void main(String[] args) throws IOException, NoSuchAlgorithmException {
-
-    String hashFilePath = "./target/hashID.ser";
-    HashMap<String, String> loadedMap = null;
-    
-    try {
-      loadedMap = readFromSerializedFile(hashFilePath);
-      if (loadedMap != null) {
-        // System.out.println("Loaded HashMap:");
-        // for (String key : loadedMap.keySet()) {
-        //   System.out.println("\t" + key + ": " + loadedMap.get(key));
-        // }
-      } else {
-        System.err.println("Error: HashMap might be null.");
-      }
-    } catch (IOException e) {
-      System.err.println("Error reading file: " + e.getMessage());
-    } catch (ClassNotFoundException e) {
-      System.err.println("Error: Class not found during deserialization: " + e.getMessage());
-    }
-
-
-
-    // String checkPath = "D:\\";
-
-
-    // String checkFile = "private_note1.txt";
-    // String referenceHash = loadedMap.get(checkFile);
-    
-    // if (checkFileIntegrity(checkPath + checkFile, referenceHash)) {
-    //   System.out.println("File <" + checkFile + "> integrity verified. Hash matches reference.");
-    // } else {
-    //   System.err.println("File <" + checkFile + "> integrity compromised. Hashes don't match!");
-    // }
-
-
-    
-    String checkPath = "D:\\";
-    File dir = new File(checkPath);
-
-    if (dir.exists() && dir.isDirectory()) {
-      String[] files = dir.list();
-      if (files != null) {
-        for (String file : files) {
-          File filePath = new File(checkPath + file);
-          if (!filePath.isDirectory())
-          {
-            
-            String refHash = loadedMap.get(file);
-            // System.out.println(file + ": " + refHash);
-            if (refHash == null){
-              System.out.println("File <" + file + "> was added.");
-            }
-            else{
-              if (!checkFileIntegrity(checkPath + file, refHash)) {
-                System.out.println("File <" + file + "> was modified.");
-              }
-              else {
-                System.out.println("File <" + file + "> is up to date.");
-              } 
-            }
-          }
-        }
-      } else {
-        System.out.println("No files found in the directory.");
-      }
-    } else {
-      System.err.println("Error: Directory not found or not a directory: " + checkPath);
-    }
-  }
+  
 }

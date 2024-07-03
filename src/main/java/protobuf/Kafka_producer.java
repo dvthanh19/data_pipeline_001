@@ -35,8 +35,8 @@ public class Kafka_producer {
 
 
         // File details
-        String fileName = "test";
-        String fileExt = ".txt";
+        String fileName = "vid";
+        String fileExt = ".mp4";
         String filePath = "D:\\dir_client\\" + fileName + fileExt;
         File file = new File(filePath);
         float fileSize = file.length();
@@ -44,7 +44,9 @@ public class Kafka_producer {
 
 
         System.out.println("[Producer] Starting...");
-        int chunkSize = 1024;//1024 * 1024 - 200; // 1 MB chunks
+        // int chunkSize = 1024;//1024 * 1024 - 200; // 1 MB chunks
+        int chunkSize = 1024 * 1024 - 200; // 1 MB chunks
+
         try (
             KafkaProducer<String, byte[]> producer = new KafkaProducer<>(props);
             FileInputStream inputStream = new FileInputStream(filePath);

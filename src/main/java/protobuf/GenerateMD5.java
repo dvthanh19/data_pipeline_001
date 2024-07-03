@@ -14,6 +14,69 @@ import java.util.HashMap;
 
 
 public class GenerateMD5 {
+  public static void main(String[] args) throws IOException, NoSuchAlgorithmException {
+    HashMap<String, String> dict = new HashMap<>();
+    
+    String directoryPath = "D:\\dir_client\\";
+    String hashFilePath = "./target/MD5_file.ser";
+
+    File directory = new File(directoryPath);
+    
+    if (directory.exists() && directory.isDirectory()) {
+      String[] files = directory.list();
+      if (files != null) {
+        for (String file : files) {
+          File filePath = new File(directoryPath + file);
+          if (!filePath.isDirectory())
+          {
+            dict.put(file, getMD5Hash(directoryPath + file));
+            System.out.println(file + ": " + dict.get(file));
+          }
+        }
+      } else {
+        System.out.println("No files found in the directory.");
+      }
+    } else {
+      System.err.println("Error: Directory not found or not a directory: " + directoryPath);
+    }
+
+    
+    writeToSerializedFile(dict, hashFilePath);
+  }
+
+  public static void generateMD5() throws IOException, NoSuchAlgorithmException {
+    HashMap<String, String> dict = new HashMap<>();
+    
+    String directoryPath = "D:\\dir_client\\";
+    String hashFilePath = "./target/MD5_file.ser";
+
+    File directory = new File(directoryPath);
+    
+    if (directory.exists() && directory.isDirectory()) {
+      String[] files = directory.list();
+      if (files != null) {
+        for (String file : files) {
+          File filePath = new File(directoryPath + file);
+          if (!filePath.isDirectory())
+          {
+            dict.put(file, getMD5Hash(directoryPath + file));
+            System.out.println(file + ": " + dict.get(file));
+          }
+        }
+      } else {
+        System.out.println("No files found in the directory.");
+      }
+    } else {
+      System.err.println("Error: Directory not found or not a directory: " + directoryPath);
+    }
+
+    
+    writeToSerializedFile(dict, hashFilePath);
+  }
+
+
+
+
   public static String getMD5Hash(String filePath) throws IOException, NoSuchAlgorithmException {
     MessageDigest md = MessageDigest.getInstance("MD5");
     try (FileInputStream fis = new FileInputStream(filePath)) {
@@ -42,11 +105,6 @@ public class GenerateMD5 {
     File file = new File(path);
     return file.exists() && (file.isFile() || file.isDirectory());
   }
-  
-  public static boolean isFile(String path) {
-    File file = new File(path);
-    return file.exists() && file.isFile();
-  }
 
   public static void writeToSerializedFile(HashMap<String, String> map, String filePath) throws IOException {
     try (
@@ -64,31 +122,5 @@ public class GenerateMD5 {
     }
   }
 
-  public static void main(String[] args) throws IOException, NoSuchAlgorithmException {
-    HashMap<String, String> dict = new HashMap<>();
-    
-    String directoryPath = "D:\\";
-    File directory = new File(directoryPath);
-    
-    if (directory.exists() && directory.isDirectory()) {
-      String[] files = directory.list();
-      if (files != null) {
-        for (String file : files) {
-          File filePath = new File(directoryPath + file);
-          if (!filePath.isDirectory())
-          {
-            dict.put(file, getMD5Hash(directoryPath + file));
-            System.out.println(file + ": " + dict.get(file));
-          }
-        }
-      } else {
-        System.out.println("No files found in the directory.");
-      }
-    } else {
-      System.err.println("Error: Directory not found or not a directory: " + directoryPath);
-    }
 
-    String hashFilePath = "./target/hashID.ser";
-    writeToSerializedFile(dict, hashFilePath);
-  }
 }

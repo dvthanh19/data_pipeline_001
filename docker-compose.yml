@@ -63,7 +63,7 @@ services:
       kafka-broker:
         condition: service_healthy
     environment:
-      KAFKA_CLUSTERS_0_NAME: vdt2024
+      KAFKA_CLUSTERS_0_NAME: demo_kafka_cluster
       KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka-broker:9093,broker02:9095
       KAFKA_CLUSTERS_0_METRICS_PORT: 9090
     mem_limit: 1610612736

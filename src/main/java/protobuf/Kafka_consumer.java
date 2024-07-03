@@ -50,13 +50,14 @@ public class Kafka_consumer {
         consumer.subscribe(Collections.singletonList(TOPIC_NAME));
 
 
-        String fileName = "test";
-        String fileExt = ".txt";
+        String fileName = "vid" + "_server";
+        String fileExt = ".mp4";
         String filePath = "D:\\dir_server\\" + fileName + fileExt;
         File outputFile = new File(filePath);
         long chunknum = 0;
         long count = 0;
         boolean isFirst = true;
+        boolean fun = true;
 
         
 
@@ -64,6 +65,13 @@ public class Kafka_consumer {
         try (FileOutputStream outputStream = new FileOutputStream(outputFile)) {
             while (true) {
                 ConsumerRecords<Long, byte[]> records = consumer.poll(Duration.ofMillis(50));
+
+                if (fun) 
+                {
+                    fun = false;
+                    System.out.println("------------ OK ------------");
+                }
+
                 for (ConsumerRecord<Long, byte[]> record : records) {
                     byte[] message = record.value();
                     Datachunk chunk = Datachunk.parseFrom(message);
@@ -84,44 +92,55 @@ public class Kafka_consumer {
                         outputStream.write(chunk.getBody().toByteArray());
                         expectedChunk += 1;
                         
-                        Datachunk tmp = chunkList.getFirst();
-                        if (expectedChunk == Long.parseLong(tmp.getChunkID()))
+                        if (chunkList.size() > 0)
                         {
-                            while (expectedChunk == Long.parseLong(tmp.getChunkID()))
+                            Datachunk tmp = chunkList.getFirst();
+                            if (expectedChunk == Long.parseLong(tmp.getChunkID()))
                             {
-                                outputStream.write(tmp.getBody().toByteArray());
-                                chunkList.removeFirst();
+                                while (expectedChunk == Long.parseLong(tmp.getChunkID()))
+                                {
+                                    outputStream.write(tmp.getBody().toByteArray());
+                                    chunkList.removeFirst();
 
-                                tmp = chunkList.getFirst();
-                                expectedChunk += 1;
+                                    expectedChunk += 1;
+                                    if (chunkList.size() > 0)
+                                    {
+                                        tmp = chunkList.getFirst();
+                                    }
+                                }
                             }
                         }
                     }
                     else
                     {
+                        count += 1;
                         boolean successFlag = addChunkIntoList(chunk);
                         if (successFlag == true){
-                            count += 1;
+                            // count += 1;
                         }
                     }
+                    System.out.println("count: " + count + ",      expected: " + expectedChunk  + ",      size: " + chunkList.size());
                     
                 }
                 if (chunknum == count && !isFirst) {
-                    System.out.println("Done receiving" + String.valueOf(chunknum) + "/" + String.valueOf(chunknum));
+                    System.out.println("Done receiving: " + String.valueOf(chunknum) + "/" + String.valueOf(chunknum));
 
                     int listSize = chunkList.size();
                     for (int i = 0; i < listSize; i += 1)
                     {
+                        expectedChunk += 1;
                         Datachunk tmp = chunkList.getFirst();
                         outputStream.write(tmp.getBody().toByteArray());
 
                         chunkList.removeFirst();
                     }
 
+                    System.out.println("-- expected: " + expectedChunk);
                     break;
                 }
             }
             consumer.close();
+
         } catch (IOException e) {
             
             e.printStackTrace();
@@ -134,34 +153,55 @@ public class Kafka_consumer {
     private static boolean addChunkIntoList(Datachunk chunk)
     {
         int size = chunkList.size();
-
-        int i = size/2;
-
-
-        while(i >= 0)
+        if (size == 0)
         {
-            Datachunk tmp = chunkList.get(i);
-            if (expectedChunk < Long.parseLong(tmp.getChunkID()))
-            {
-                i -= 1;
-            }
-            else if (expectedChunk > Long.parseLong(tmp.getChunkID()))
-            {
-                i += 1;
+            chunkList.add(0, chunk);  
+            return true;
+        }
+
+        long id = Long.parseLong(chunk.getChunkID());
+
+
+        // int i = size/2;
+        // int k = 0;
+        // Datachunk tmp = chunkList.get(size/2);
+
+        // if (id < Long.parseLong(tmp.getChunkID())) 
+        //     k = -1;
+        // else k = 1;
+
+        // for (;i >= 0 && i < chunkList.size(); i += k)
+        // {
+        //     tmp = chunkList.get(i);
+        //     if (k == -1 && Long.parseLong(tmp.getChunkID()) < id)
+        //     {
+        //         i += 1;
+        //         break;
+        //     }
+        //     else if (k == 1 && Long.parseLong(tmp.getChunkID()) > id)
+        //     {
+        //         break;
+        //     }
+        // }
+
+        // if (i < 0) // The chunkID is smaller than headID
+        // { 
+        //     return false;
+        // }
+
+        // // alternative --------------
+        int i = 0;
+        Datachunk tmp;
+        for (; i < chunkList.size(); i++)
+        {
+            tmp = chunkList.get(i);
+            if (id < Long.parseLong(tmp.getChunkID()))
                 break;
-            }
-            else
-            {
-                return false;
-            }
         }
 
-        if (i < 0) // The chunkID is smaller than headID
-        { 
-            return false;
-        }
 
-        chunkList.add(i, chunk);        
+        // System.out.println(i);
+        chunkList.add(i, chunk);
         return true;
     }
 }
