@@ -11,10 +11,6 @@ message Metadata {
     string chunkID      = 7;
 }
 
-// message Content {
-//     bytes   content     = 1;
-// }
-
 message Datachunk {
     // Metadata header     = 1;
     string fileHash     = 1;
@@ -30,3 +26,15 @@ message Datachunk {
     bytes body          = 8;
 }
 
+message FileType {
+    string fileHash     = 1;
+    string fileName     = 2;
+    string fileExt      = 3;
+
+    bool tracked        = 4;
+}
+
+message DirType {
+    string dirName   = 1;
+    repeated FileType files = 2;
+}

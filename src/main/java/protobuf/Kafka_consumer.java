@@ -113,10 +113,11 @@ public class Kafka_consumer {
                     }
                     else
                     {
-                        count += 1;
+                        
+                        // count += 1; //  ???
                         boolean successFlag = addChunkIntoList(chunk);
                         if (successFlag == true){
-                            // count += 1;
+                            count += 1; //  ???
                         }
                     }
                     System.out.println("count: " + count + ",      expected: " + expectedChunk  + ",      size: " + chunkList.size());

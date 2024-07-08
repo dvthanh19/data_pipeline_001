@@ -2485,6 +2485,1773 @@ public final class FileSchema {
 
   }
 
+  public interface FileTypeOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:FileType)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>string fileHash = 1;</code>
+     * @return The fileHash.
+     */
+    java.lang.String getFileHash();
+    /**
+     * <code>string fileHash = 1;</code>
+     * @return The bytes for fileHash.
+     */
+    com.google.protobuf.ByteString
+        getFileHashBytes();
+
+    /**
+     * <code>string fileName = 2;</code>
+     * @return The fileName.
+     */
+    java.lang.String getFileName();
+    /**
+     * <code>string fileName = 2;</code>
+     * @return The bytes for fileName.
+     */
+    com.google.protobuf.ByteString
+        getFileNameBytes();
+
+    /**
+     * <code>string fileExt = 3;</code>
+     * @return The fileExt.
+     */
+    java.lang.String getFileExt();
+    /**
+     * <code>string fileExt = 3;</code>
+     * @return The bytes for fileExt.
+     */
+    com.google.protobuf.ByteString
+        getFileExtBytes();
+
+    /**
+     * <code>bool tracked = 4;</code>
+     * @return The tracked.
+     */
+    boolean getTracked();
+  }
+  /**
+   * Protobuf type {@code FileType}
+   */
+  public static final class FileType extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:FileType)
+      FileTypeOrBuilder {
+  private static final long serialVersionUID = 0L;
+    static {
+      com.google.protobuf.RuntimeVersion.validateProtobufGencodeVersion(
+        com.google.protobuf.RuntimeVersion.RuntimeDomain.PUBLIC,
+        /* major= */ 4,
+        /* minor= */ 27,
+        /* patch= */ 2,
+        /* suffix= */ "",
+        FileType.class.getName());
+    }
+    // Use FileType.newBuilder() to construct.
+    private FileType(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+    }
+    private FileType() {
+      fileHash_ = "";
+      fileName_ = "";
+      fileExt_ = "";
+    }
+
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return FileSchema.internal_static_FileType_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return FileSchema.internal_static_FileType_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              FileSchema.FileType.class, FileSchema.FileType.Builder.class);
+    }
+
+    public static final int FILEHASH_FIELD_NUMBER = 1;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object fileHash_ = "";
+    /**
+     * <code>string fileHash = 1;</code>
+     * @return The fileHash.
+     */
+    @java.lang.Override
+    public java.lang.String getFileHash() {
+      java.lang.Object ref = fileHash_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        fileHash_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string fileHash = 1;</code>
+     * @return The bytes for fileHash.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getFileHashBytes() {
+      java.lang.Object ref = fileHash_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        fileHash_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int FILENAME_FIELD_NUMBER = 2;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object fileName_ = "";
+    /**
+     * <code>string fileName = 2;</code>
+     * @return The fileName.
+     */
+    @java.lang.Override
+    public java.lang.String getFileName() {
+      java.lang.Object ref = fileName_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        fileName_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string fileName = 2;</code>
+     * @return The bytes for fileName.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getFileNameBytes() {
+      java.lang.Object ref = fileName_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        fileName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int FILEEXT_FIELD_NUMBER = 3;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object fileExt_ = "";
+    /**
+     * <code>string fileExt = 3;</code>
+     * @return The fileExt.
+     */
+    @java.lang.Override
+    public java.lang.String getFileExt() {
+      java.lang.Object ref = fileExt_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        fileExt_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string fileExt = 3;</code>
+     * @return The bytes for fileExt.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getFileExtBytes() {
+      java.lang.Object ref = fileExt_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        fileExt_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int TRACKED_FIELD_NUMBER = 4;
+    private boolean tracked_ = false;
+    /**
+     * <code>bool tracked = 4;</code>
+     * @return The tracked.
+     */
+    @java.lang.Override
+    public boolean getTracked() {
+      return tracked_;
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (!com.google.protobuf.GeneratedMessage.isStringEmpty(fileHash_)) {
+        com.google.protobuf.GeneratedMessage.writeString(output, 1, fileHash_);
+      }
+      if (!com.google.protobuf.GeneratedMessage.isStringEmpty(fileName_)) {
+        com.google.protobuf.GeneratedMessage.writeString(output, 2, fileName_);
+      }
+      if (!com.google.protobuf.GeneratedMessage.isStringEmpty(fileExt_)) {
+        com.google.protobuf.GeneratedMessage.writeString(output, 3, fileExt_);
+      }
+      if (tracked_ != false) {
+        output.writeBool(4, tracked_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (!com.google.protobuf.GeneratedMessage.isStringEmpty(fileHash_)) {
+        size += com.google.protobuf.GeneratedMessage.computeStringSize(1, fileHash_);
+      }
+      if (!com.google.protobuf.GeneratedMessage.isStringEmpty(fileName_)) {
+        size += com.google.protobuf.GeneratedMessage.computeStringSize(2, fileName_);
+      }
+      if (!com.google.protobuf.GeneratedMessage.isStringEmpty(fileExt_)) {
+        size += com.google.protobuf.GeneratedMessage.computeStringSize(3, fileExt_);
+      }
+      if (tracked_ != false) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(4, tracked_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof FileSchema.FileType)) {
+        return super.equals(obj);
+      }
+      FileSchema.FileType other = (FileSchema.FileType) obj;
+
+      if (!getFileHash()
+          .equals(other.getFileHash())) return false;
+      if (!getFileName()
+          .equals(other.getFileName())) return false;
+      if (!getFileExt()
+          .equals(other.getFileExt())) return false;
+      if (getTracked()
+          != other.getTracked()) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + FILEHASH_FIELD_NUMBER;
+      hash = (53 * hash) + getFileHash().hashCode();
+      hash = (37 * hash) + FILENAME_FIELD_NUMBER;
+      hash = (53 * hash) + getFileName().hashCode();
+      hash = (37 * hash) + FILEEXT_FIELD_NUMBER;
+      hash = (53 * hash) + getFileExt().hashCode();
+      hash = (37 * hash) + TRACKED_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+          getTracked());
+      hash = (29 * hash) + getUnknownFields().hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static FileSchema.FileType parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static FileSchema.FileType parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static FileSchema.FileType parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static FileSchema.FileType parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static FileSchema.FileType parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static FileSchema.FileType parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static FileSchema.FileType parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseWithIOException(PARSER, input);
+    }
+    public static FileSchema.FileType parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public static FileSchema.FileType parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+
+    public static FileSchema.FileType parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static FileSchema.FileType parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseWithIOException(PARSER, input);
+    }
+    public static FileSchema.FileType parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(FileSchema.FileType prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code FileType}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:FileType)
+        FileSchema.FileTypeOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return FileSchema.internal_static_FileType_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return FileSchema.internal_static_FileType_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                FileSchema.FileType.class, FileSchema.FileType.Builder.class);
+      }
+
+      // Construct using FileSchema.FileType.newBuilder()
+      private Builder() {
+
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        bitField0_ = 0;
+        fileHash_ = "";
+        fileName_ = "";
+        fileExt_ = "";
+        tracked_ = false;
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return FileSchema.internal_static_FileType_descriptor;
+      }
+
+      @java.lang.Override
+      public FileSchema.FileType getDefaultInstanceForType() {
+        return FileSchema.FileType.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public FileSchema.FileType build() {
+        FileSchema.FileType result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public FileSchema.FileType buildPartial() {
+        FileSchema.FileType result = new FileSchema.FileType(this);
+        if (bitField0_ != 0) { buildPartial0(result); }
+        onBuilt();
+        return result;
+      }
+
+      private void buildPartial0(FileSchema.FileType result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.fileHash_ = fileHash_;
+        }
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.fileName_ = fileName_;
+        }
+        if (((from_bitField0_ & 0x00000004) != 0)) {
+          result.fileExt_ = fileExt_;
+        }
+        if (((from_bitField0_ & 0x00000008) != 0)) {
+          result.tracked_ = tracked_;
+        }
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof FileSchema.FileType) {
+          return mergeFrom((FileSchema.FileType)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(FileSchema.FileType other) {
+        if (other == FileSchema.FileType.getDefaultInstance()) return this;
+        if (!other.getFileHash().isEmpty()) {
+          fileHash_ = other.fileHash_;
+          bitField0_ |= 0x00000001;
+          onChanged();
+        }
+        if (!other.getFileName().isEmpty()) {
+          fileName_ = other.fileName_;
+          bitField0_ |= 0x00000002;
+          onChanged();
+        }
+        if (!other.getFileExt().isEmpty()) {
+          fileExt_ = other.fileExt_;
+          bitField0_ |= 0x00000004;
+          onChanged();
+        }
+        if (other.getTracked() != false) {
+          setTracked(other.getTracked());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
+        try {
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                fileHash_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 10
+              case 18: {
+                fileName_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 18
+              case 26: {
+                fileExt_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000004;
+                break;
+              } // case 26
+              case 32: {
+                tracked_ = input.readBool();
+                bitField0_ |= 0x00000008;
+                break;
+              } // case 32
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.unwrapIOException();
+        } finally {
+          onChanged();
+        } // finally
+        return this;
+      }
+      private int bitField0_;
+
+      private java.lang.Object fileHash_ = "";
+      /**
+       * <code>string fileHash = 1;</code>
+       * @return The fileHash.
+       */
+      public java.lang.String getFileHash() {
+        java.lang.Object ref = fileHash_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          fileHash_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string fileHash = 1;</code>
+       * @return The bytes for fileHash.
+       */
+      public com.google.protobuf.ByteString
+          getFileHashBytes() {
+        java.lang.Object ref = fileHash_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          fileHash_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string fileHash = 1;</code>
+       * @param value The fileHash to set.
+       * @return This builder for chaining.
+       */
+      public Builder setFileHash(
+          java.lang.String value) {
+        if (value == null) { throw new NullPointerException(); }
+        fileHash_ = value;
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string fileHash = 1;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearFileHash() {
+        fileHash_ = getDefaultInstance().getFileHash();
+        bitField0_ = (bitField0_ & ~0x00000001);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string fileHash = 1;</code>
+       * @param value The bytes for fileHash to set.
+       * @return This builder for chaining.
+       */
+      public Builder setFileHashBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
+        fileHash_ = value;
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object fileName_ = "";
+      /**
+       * <code>string fileName = 2;</code>
+       * @return The fileName.
+       */
+      public java.lang.String getFileName() {
+        java.lang.Object ref = fileName_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          fileName_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string fileName = 2;</code>
+       * @return The bytes for fileName.
+       */
+      public com.google.protobuf.ByteString
+          getFileNameBytes() {
+        java.lang.Object ref = fileName_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          fileName_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string fileName = 2;</code>
+       * @param value The fileName to set.
+       * @return This builder for chaining.
+       */
+      public Builder setFileName(
+          java.lang.String value) {
+        if (value == null) { throw new NullPointerException(); }
+        fileName_ = value;
+        bitField0_ |= 0x00000002;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string fileName = 2;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearFileName() {
+        fileName_ = getDefaultInstance().getFileName();
+        bitField0_ = (bitField0_ & ~0x00000002);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string fileName = 2;</code>
+       * @param value The bytes for fileName to set.
+       * @return This builder for chaining.
+       */
+      public Builder setFileNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
+        fileName_ = value;
+        bitField0_ |= 0x00000002;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object fileExt_ = "";
+      /**
+       * <code>string fileExt = 3;</code>
+       * @return The fileExt.
+       */
+      public java.lang.String getFileExt() {
+        java.lang.Object ref = fileExt_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          fileExt_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string fileExt = 3;</code>
+       * @return The bytes for fileExt.
+       */
+      public com.google.protobuf.ByteString
+          getFileExtBytes() {
+        java.lang.Object ref = fileExt_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          fileExt_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string fileExt = 3;</code>
+       * @param value The fileExt to set.
+       * @return This builder for chaining.
+       */
+      public Builder setFileExt(
+          java.lang.String value) {
+        if (value == null) { throw new NullPointerException(); }
+        fileExt_ = value;
+        bitField0_ |= 0x00000004;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string fileExt = 3;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearFileExt() {
+        fileExt_ = getDefaultInstance().getFileExt();
+        bitField0_ = (bitField0_ & ~0x00000004);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string fileExt = 3;</code>
+       * @param value The bytes for fileExt to set.
+       * @return This builder for chaining.
+       */
+      public Builder setFileExtBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
+        fileExt_ = value;
+        bitField0_ |= 0x00000004;
+        onChanged();
+        return this;
+      }
+
+      private boolean tracked_ ;
+      /**
+       * <code>bool tracked = 4;</code>
+       * @return The tracked.
+       */
+      @java.lang.Override
+      public boolean getTracked() {
+        return tracked_;
+      }
+      /**
+       * <code>bool tracked = 4;</code>
+       * @param value The tracked to set.
+       * @return This builder for chaining.
+       */
+      public Builder setTracked(boolean value) {
+
+        tracked_ = value;
+        bitField0_ |= 0x00000008;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>bool tracked = 4;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearTracked() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        tracked_ = false;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:FileType)
+    }
+
+    // @@protoc_insertion_point(class_scope:FileType)
+    private static final FileSchema.FileType DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new FileSchema.FileType();
+    }
+
+    public static FileSchema.FileType getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<FileType>
+        PARSER = new com.google.protobuf.AbstractParser<FileType>() {
+      @java.lang.Override
+      public FileType parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
+      }
+    };
+
+    public static com.google.protobuf.Parser<FileType> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<FileType> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public FileSchema.FileType getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface DirTypeOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:DirType)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>string dirName = 1;</code>
+     * @return The dirName.
+     */
+    java.lang.String getDirName();
+    /**
+     * <code>string dirName = 1;</code>
+     * @return The bytes for dirName.
+     */
+    com.google.protobuf.ByteString
+        getDirNameBytes();
+
+    /**
+     * <code>repeated .FileType files = 2;</code>
+     */
+    java.util.List<FileSchema.FileType> 
+        getFilesList();
+    /**
+     * <code>repeated .FileType files = 2;</code>
+     */
+    FileSchema.FileType getFiles(int index);
+    /**
+     * <code>repeated .FileType files = 2;</code>
+     */
+    int getFilesCount();
+    /**
+     * <code>repeated .FileType files = 2;</code>
+     */
+    java.util.List<? extends FileSchema.FileTypeOrBuilder> 
+        getFilesOrBuilderList();
+    /**
+     * <code>repeated .FileType files = 2;</code>
+     */
+    FileSchema.FileTypeOrBuilder getFilesOrBuilder(
+        int index);
+  }
+  /**
+   * Protobuf type {@code DirType}
+   */
+  public static final class DirType extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:DirType)
+      DirTypeOrBuilder {
+  private static final long serialVersionUID = 0L;
+    static {
+      com.google.protobuf.RuntimeVersion.validateProtobufGencodeVersion(
+        com.google.protobuf.RuntimeVersion.RuntimeDomain.PUBLIC,
+        /* major= */ 4,
+        /* minor= */ 27,
+        /* patch= */ 2,
+        /* suffix= */ "",
+        DirType.class.getName());
+    }
+    // Use DirType.newBuilder() to construct.
+    private DirType(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+    }
+    private DirType() {
+      dirName_ = "";
+      files_ = java.util.Collections.emptyList();
+    }
+
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return FileSchema.internal_static_DirType_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return FileSchema.internal_static_DirType_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              FileSchema.DirType.class, FileSchema.DirType.Builder.class);
+    }
+
+    public static final int DIRNAME_FIELD_NUMBER = 1;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object dirName_ = "";
+    /**
+     * <code>string dirName = 1;</code>
+     * @return The dirName.
+     */
+    @java.lang.Override
+    public java.lang.String getDirName() {
+      java.lang.Object ref = dirName_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        dirName_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string dirName = 1;</code>
+     * @return The bytes for dirName.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getDirNameBytes() {
+      java.lang.Object ref = dirName_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        dirName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int FILES_FIELD_NUMBER = 2;
+    @SuppressWarnings("serial")
+    private java.util.List<FileSchema.FileType> files_;
+    /**
+     * <code>repeated .FileType files = 2;</code>
+     */
+    @java.lang.Override
+    public java.util.List<FileSchema.FileType> getFilesList() {
+      return files_;
+    }
+    /**
+     * <code>repeated .FileType files = 2;</code>
+     */
+    @java.lang.Override
+    public java.util.List<? extends FileSchema.FileTypeOrBuilder> 
+        getFilesOrBuilderList() {
+      return files_;
+    }
+    /**
+     * <code>repeated .FileType files = 2;</code>
+     */
+    @java.lang.Override
+    public int getFilesCount() {
+      return files_.size();
+    }
+    /**
+     * <code>repeated .FileType files = 2;</code>
+     */
+    @java.lang.Override
+    public FileSchema.FileType getFiles(int index) {
+      return files_.get(index);
+    }
+    /**
+     * <code>repeated .FileType files = 2;</code>
+     */
+    @java.lang.Override
+    public FileSchema.FileTypeOrBuilder getFilesOrBuilder(
+        int index) {
+      return files_.get(index);
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (!com.google.protobuf.GeneratedMessage.isStringEmpty(dirName_)) {
+        com.google.protobuf.GeneratedMessage.writeString(output, 1, dirName_);
+      }
+      for (int i = 0; i < files_.size(); i++) {
+        output.writeMessage(2, files_.get(i));
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (!com.google.protobuf.GeneratedMessage.isStringEmpty(dirName_)) {
+        size += com.google.protobuf.GeneratedMessage.computeStringSize(1, dirName_);
+      }
+      for (int i = 0; i < files_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(2, files_.get(i));
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof FileSchema.DirType)) {
+        return super.equals(obj);
+      }
+      FileSchema.DirType other = (FileSchema.DirType) obj;
+
+      if (!getDirName()
+          .equals(other.getDirName())) return false;
+      if (!getFilesList()
+          .equals(other.getFilesList())) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + DIRNAME_FIELD_NUMBER;
+      hash = (53 * hash) + getDirName().hashCode();
+      if (getFilesCount() > 0) {
+        hash = (37 * hash) + FILES_FIELD_NUMBER;
+        hash = (53 * hash) + getFilesList().hashCode();
+      }
+      hash = (29 * hash) + getUnknownFields().hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static FileSchema.DirType parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static FileSchema.DirType parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static FileSchema.DirType parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static FileSchema.DirType parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static FileSchema.DirType parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static FileSchema.DirType parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static FileSchema.DirType parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseWithIOException(PARSER, input);
+    }
+    public static FileSchema.DirType parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public static FileSchema.DirType parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+
+    public static FileSchema.DirType parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static FileSchema.DirType parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseWithIOException(PARSER, input);
+    }
+    public static FileSchema.DirType parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessage
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(FileSchema.DirType prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code DirType}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:DirType)
+        FileSchema.DirTypeOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return FileSchema.internal_static_DirType_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return FileSchema.internal_static_DirType_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                FileSchema.DirType.class, FileSchema.DirType.Builder.class);
+      }
+
+      // Construct using FileSchema.DirType.newBuilder()
+      private Builder() {
+
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        bitField0_ = 0;
+        dirName_ = "";
+        if (filesBuilder_ == null) {
+          files_ = java.util.Collections.emptyList();
+        } else {
+          files_ = null;
+          filesBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return FileSchema.internal_static_DirType_descriptor;
+      }
+
+      @java.lang.Override
+      public FileSchema.DirType getDefaultInstanceForType() {
+        return FileSchema.DirType.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public FileSchema.DirType build() {
+        FileSchema.DirType result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public FileSchema.DirType buildPartial() {
+        FileSchema.DirType result = new FileSchema.DirType(this);
+        buildPartialRepeatedFields(result);
+        if (bitField0_ != 0) { buildPartial0(result); }
+        onBuilt();
+        return result;
+      }
+
+      private void buildPartialRepeatedFields(FileSchema.DirType result) {
+        if (filesBuilder_ == null) {
+          if (((bitField0_ & 0x00000002) != 0)) {
+            files_ = java.util.Collections.unmodifiableList(files_);
+            bitField0_ = (bitField0_ & ~0x00000002);
+          }
+          result.files_ = files_;
+        } else {
+          result.files_ = filesBuilder_.build();
+        }
+      }
+
+      private void buildPartial0(FileSchema.DirType result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.dirName_ = dirName_;
+        }
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof FileSchema.DirType) {
+          return mergeFrom((FileSchema.DirType)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(FileSchema.DirType other) {
+        if (other == FileSchema.DirType.getDefaultInstance()) return this;
+        if (!other.getDirName().isEmpty()) {
+          dirName_ = other.dirName_;
+          bitField0_ |= 0x00000001;
+          onChanged();
+        }
+        if (filesBuilder_ == null) {
+          if (!other.files_.isEmpty()) {
+            if (files_.isEmpty()) {
+              files_ = other.files_;
+              bitField0_ = (bitField0_ & ~0x00000002);
+            } else {
+              ensureFilesIsMutable();
+              files_.addAll(other.files_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.files_.isEmpty()) {
+            if (filesBuilder_.isEmpty()) {
+              filesBuilder_.dispose();
+              filesBuilder_ = null;
+              files_ = other.files_;
+              bitField0_ = (bitField0_ & ~0x00000002);
+              filesBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getFilesFieldBuilder() : null;
+            } else {
+              filesBuilder_.addAllMessages(other.files_);
+            }
+          }
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
+        try {
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                dirName_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 10
+              case 18: {
+                FileSchema.FileType m =
+                    input.readMessage(
+                        FileSchema.FileType.parser(),
+                        extensionRegistry);
+                if (filesBuilder_ == null) {
+                  ensureFilesIsMutable();
+                  files_.add(m);
+                } else {
+                  filesBuilder_.addMessage(m);
+                }
+                break;
+              } // case 18
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.unwrapIOException();
+        } finally {
+          onChanged();
+        } // finally
+        return this;
+      }
+      private int bitField0_;
+
+      private java.lang.Object dirName_ = "";
+      /**
+       * <code>string dirName = 1;</code>
+       * @return The dirName.
+       */
+      public java.lang.String getDirName() {
+        java.lang.Object ref = dirName_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          dirName_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string dirName = 1;</code>
+       * @return The bytes for dirName.
+       */
+      public com.google.protobuf.ByteString
+          getDirNameBytes() {
+        java.lang.Object ref = dirName_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          dirName_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string dirName = 1;</code>
+       * @param value The dirName to set.
+       * @return This builder for chaining.
+       */
+      public Builder setDirName(
+          java.lang.String value) {
+        if (value == null) { throw new NullPointerException(); }
+        dirName_ = value;
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string dirName = 1;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearDirName() {
+        dirName_ = getDefaultInstance().getDirName();
+        bitField0_ = (bitField0_ & ~0x00000001);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string dirName = 1;</code>
+       * @param value The bytes for dirName to set.
+       * @return This builder for chaining.
+       */
+      public Builder setDirNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
+        dirName_ = value;
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return this;
+      }
+
+      private java.util.List<FileSchema.FileType> files_ =
+        java.util.Collections.emptyList();
+      private void ensureFilesIsMutable() {
+        if (!((bitField0_ & 0x00000002) != 0)) {
+          files_ = new java.util.ArrayList<FileSchema.FileType>(files_);
+          bitField0_ |= 0x00000002;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          FileSchema.FileType, FileSchema.FileType.Builder, FileSchema.FileTypeOrBuilder> filesBuilder_;
+
+      /**
+       * <code>repeated .FileType files = 2;</code>
+       */
+      public java.util.List<FileSchema.FileType> getFilesList() {
+        if (filesBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(files_);
+        } else {
+          return filesBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .FileType files = 2;</code>
+       */
+      public int getFilesCount() {
+        if (filesBuilder_ == null) {
+          return files_.size();
+        } else {
+          return filesBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .FileType files = 2;</code>
+       */
+      public FileSchema.FileType getFiles(int index) {
+        if (filesBuilder_ == null) {
+          return files_.get(index);
+        } else {
+          return filesBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .FileType files = 2;</code>
+       */
+      public Builder setFiles(
+          int index, FileSchema.FileType value) {
+        if (filesBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureFilesIsMutable();
+          files_.set(index, value);
+          onChanged();
+        } else {
+          filesBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .FileType files = 2;</code>
+       */
+      public Builder setFiles(
+          int index, FileSchema.FileType.Builder builderForValue) {
+        if (filesBuilder_ == null) {
+          ensureFilesIsMutable();
+          files_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          filesBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .FileType files = 2;</code>
+       */
+      public Builder addFiles(FileSchema.FileType value) {
+        if (filesBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureFilesIsMutable();
+          files_.add(value);
+          onChanged();
+        } else {
+          filesBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .FileType files = 2;</code>
+       */
+      public Builder addFiles(
+          int index, FileSchema.FileType value) {
+        if (filesBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureFilesIsMutable();
+          files_.add(index, value);
+          onChanged();
+        } else {
+          filesBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .FileType files = 2;</code>
+       */
+      public Builder addFiles(
+          FileSchema.FileType.Builder builderForValue) {
+        if (filesBuilder_ == null) {
+          ensureFilesIsMutable();
+          files_.add(builderForValue.build());
+          onChanged();
+        } else {
+          filesBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .FileType files = 2;</code>
+       */
+      public Builder addFiles(
+          int index, FileSchema.FileType.Builder builderForValue) {
+        if (filesBuilder_ == null) {
+          ensureFilesIsMutable();
+          files_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          filesBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .FileType files = 2;</code>
+       */
+      public Builder addAllFiles(
+          java.lang.Iterable<? extends FileSchema.FileType> values) {
+        if (filesBuilder_ == null) {
+          ensureFilesIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, files_);
+          onChanged();
+        } else {
+          filesBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .FileType files = 2;</code>
+       */
+      public Builder clearFiles() {
+        if (filesBuilder_ == null) {
+          files_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000002);
+          onChanged();
+        } else {
+          filesBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .FileType files = 2;</code>
+       */
+      public Builder removeFiles(int index) {
+        if (filesBuilder_ == null) {
+          ensureFilesIsMutable();
+          files_.remove(index);
+          onChanged();
+        } else {
+          filesBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .FileType files = 2;</code>
+       */
+      public FileSchema.FileType.Builder getFilesBuilder(
+          int index) {
+        return getFilesFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .FileType files = 2;</code>
+       */
+      public FileSchema.FileTypeOrBuilder getFilesOrBuilder(
+          int index) {
+        if (filesBuilder_ == null) {
+          return files_.get(index);  } else {
+          return filesBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .FileType files = 2;</code>
+       */
+      public java.util.List<? extends FileSchema.FileTypeOrBuilder> 
+           getFilesOrBuilderList() {
+        if (filesBuilder_ != null) {
+          return filesBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(files_);
+        }
+      }
+      /**
+       * <code>repeated .FileType files = 2;</code>
+       */
+      public FileSchema.FileType.Builder addFilesBuilder() {
+        return getFilesFieldBuilder().addBuilder(
+            FileSchema.FileType.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .FileType files = 2;</code>
+       */
+      public FileSchema.FileType.Builder addFilesBuilder(
+          int index) {
+        return getFilesFieldBuilder().addBuilder(
+            index, FileSchema.FileType.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .FileType files = 2;</code>
+       */
+      public java.util.List<FileSchema.FileType.Builder> 
+           getFilesBuilderList() {
+        return getFilesFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          FileSchema.FileType, FileSchema.FileType.Builder, FileSchema.FileTypeOrBuilder> 
+          getFilesFieldBuilder() {
+        if (filesBuilder_ == null) {
+          filesBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              FileSchema.FileType, FileSchema.FileType.Builder, FileSchema.FileTypeOrBuilder>(
+                  files_,
+                  ((bitField0_ & 0x00000002) != 0),
+                  getParentForChildren(),
+                  isClean());
+          files_ = null;
+        }
+        return filesBuilder_;
+      }
+
+      // @@protoc_insertion_point(builder_scope:DirType)
+    }
+
+    // @@protoc_insertion_point(class_scope:DirType)
+    private static final FileSchema.DirType DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new FileSchema.DirType();
+    }
+
+    public static FileSchema.DirType getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<DirType>
+        PARSER = new com.google.protobuf.AbstractParser<DirType>() {
+      @java.lang.Override
+      public DirType parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
+      }
+    };
+
+    public static com.google.protobuf.Parser<DirType> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<DirType> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public FileSchema.DirType getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_Metadata_descriptor;
   private static final 
@@ -2495,6 +4262,16 @@ public final class FileSchema {
   private static final 
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_Datachunk_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_FileType_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_FileType_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_DirType_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_DirType_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -2511,7 +4288,11 @@ public final class FileSchema {
       "\n\tDatachunk\022\020\n\010fileHash\030\001 \001(\t\022\020\n\010fileNam" +
       "e\030\002 \001(\t\022\017\n\007fileExt\030\003 \001(\t\022\020\n\010fileSize\030\004 \001" +
       "(\002\022\021\n\tchunkSize\030\005 \001(\002\022\020\n\010chunkNum\030\006 \001(\004\022" +
-      "\017\n\007chunkID\030\007 \001(\t\022\014\n\004body\030\010 \001(\014b\006proto3"
+      "\017\n\007chunkID\030\007 \001(\t\022\014\n\004body\030\010 \001(\014\"P\n\010FileTy" +
+      "pe\022\020\n\010fileHash\030\001 \001(\t\022\020\n\010fileName\030\002 \001(\t\022\017" +
+      "\n\007fileExt\030\003 \001(\t\022\017\n\007tracked\030\004 \001(\010\"4\n\007DirT" +
+      "ype\022\017\n\007dirName\030\001 \001(\t\022\030\n\005files\030\002 \003(\0132\t.Fi" +
+      "leTypeb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -2529,6 +4310,18 @@ public final class FileSchema {
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_Datachunk_descriptor,
         new java.lang.String[] { "FileHash", "FileName", "FileExt", "FileSize", "ChunkSize", "ChunkNum", "ChunkID", "Body", });
+    internal_static_FileType_descriptor =
+      getDescriptor().getMessageTypes().get(2);
+    internal_static_FileType_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_FileType_descriptor,
+        new java.lang.String[] { "FileHash", "FileName", "FileExt", "Tracked", });
+    internal_static_DirType_descriptor =
+      getDescriptor().getMessageTypes().get(3);
+    internal_static_DirType_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_DirType_descriptor,
+        new java.lang.String[] { "DirName", "Files", });
     descriptor.resolveAllFeaturesImmutable();
   }
 
