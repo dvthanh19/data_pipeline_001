@@ -28,7 +28,7 @@ import com.google.protobuf.ByteString;
 public class Producer {
     
     private static final String BOOTSTRAP_SERVERS = "localhost:9092"; // Update with your Kafka broker address
-    private static final String TOPIC_NAME  = "video-topic";
+    private static final String TOPIC_NAME  = "demo-topic";
     private static final int partition_num  = 5;
 
 

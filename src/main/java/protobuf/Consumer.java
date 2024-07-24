@@ -29,10 +29,9 @@ import org.apache.kafka.common.serialization.ByteArrayDeserializer;
 public class Consumer {
     
     private static final String BOOTSTRAP_SERVERS = "localhost:9092";
-    private static final String TOPIC_NAME = "video-topic";
+    private static final String TOPIC_NAME = "demo-topic";
     private static HashMap<String, LinkedList<Datachunk>> chunkListMap = new HashMap<>();
     private static HashMap<String, FileOutputStream> outputStreamMap = new HashMap<>();
-    // private static LinkedList<Datachunk> chunkList = new LinkedList<>();
 
 
     public static void main(String[] args) throws IOException, NoSuchAlgorithmException
@@ -54,9 +53,9 @@ public class Consumer {
         for (String file : trackFiles.keySet())
             System.out.println("File <" + file + ">         " + trackFiles.get(file));
             System.out.println("      -----------      ");
-        // Push all file with status xy (x!=1) into stack
+        // Push all file with status [xy] with x!=1 into stack
         for (String file : trackFiles.keySet())
-            if (trackFiles.get(file).charAt(0) != '1')
+            if (trackFiles.get(file).charAt(0) != '1' && trackFiles.get(file).charAt(0) != '2')
                 stack.push(file);
         
         // Remove all file with status xy (x!=1) out of hashMap
@@ -80,16 +79,17 @@ public class Consumer {
         HashMap<String, Boolean> isFirstMap = new HashMap<>();
         HashMap<String, Boolean> receiveMap = new HashMap<>();
         boolean fun = true;
-        FileOutputStream outputStream1 = new FileOutputStream(new File(dir + "test.txt"));;
+        // FileOutputStream outputStream1 = new FileOutputStream(new File(dir + "test.txt"));
         
         for (String file : trackFiles.keySet())
         {
             File outputFile = new File(dir + file);
             System.out.println(dir + file);
-            try (FileOutputStream outputStream = new FileOutputStream(outputFile)) {
+            // try (FileOutputStream outputStream = new FileOutputStream(outputFile)) {
+            try {
+                outputStreamMap.put(file, new FileOutputStream(outputFile));
                 // outputStreamMap.put(file, outputStream);
                 // outputStream1 = new FileOutputStream(outputFile);
-
             } catch (IOException e) {e.printStackTrace();}
 
             chunknumMap.put(file, (long) 0);
@@ -149,8 +149,8 @@ public class Consumer {
                 {
                     System.out.println("... 1");
                     countMap.put(fileName, countMap.get(fileName) + 1);
-                    // outputStreamMap.get(fileName).write(chunk.getBody().toByteArray());
-                    outputStream1.write(chunk.getBody().toByteArray());
+                    outputStreamMap.get(fileName).write(chunk.getBody().toByteArray());
+                    // outputStream1.write(chunk.getBody().toByteArray());
                     System.out.println("... 2");
                     expectedChunkMap.put(fileName, expectedChunkMap.get(fileName) + 1);
                     
@@ -163,9 +163,10 @@ public class Consumer {
                             while (expectedChunkMap.get(fileName) == Long.parseLong(tmp.getChunkID()))
                             {
                                 outputStreamMap.get(fileName).write(tmp.getBody().toByteArray());
+                                // outputStream1.write(tmp.getBody().toByteArray());
                                 chunkListMap.get(fileName).removeFirst();
-
                                 expectedChunkMap.put(fileName, expectedChunkMap.get(fileName) + 1);
+
                                 if (chunkListMap.get(fileName).size() > 0)
                                 {
                                     tmp = chunkListMap.get(fileName).getFirst();
@@ -187,6 +188,8 @@ public class Consumer {
             }
 
             int count = 0;
+
+            // Write the remaining chunks in linked list to file
             // System.out.println("...2");
             for (String file : trackFiles.keySet())
             {   
@@ -194,7 +197,7 @@ public class Consumer {
                 {
                     System.out.println(chunknumMap.get(file) + "    " + countMap.get(file) + "    " + !isFirstMap.get(file));// ----
                     if (chunknumMap.get(file) == countMap.get(file) && !isFirstMap.get(file)) {
-                        System.out.println("...2.2   " + chunknumMap.get(file));
+                        System.out.println("... 2.2   " + chunknumMap.get(file));
                         count += 1;
                         
 
@@ -203,9 +206,11 @@ public class Consumer {
                         int listSize = chunkListMap.get(file).size();
                         for (int i = 0; i < listSize; i += 1)
                         {
+                            System.out.println("... 2.3");
                             expectedChunkMap.put(file, expectedChunkMap.get(file) + 1) ;
                             Datachunk tmp = chunkListMap.get(file).getFirst();
                             outputStreamMap.get(file).write(tmp.getBody().toByteArray());
+                            // outputStream1.write(tmp.getBody().toByteArray());
         
                             chunkListMap.get(file).removeFirst();
                         }
