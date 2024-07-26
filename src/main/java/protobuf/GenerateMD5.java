@@ -50,8 +50,7 @@ public class GenerateMD5 {
     writeToSerializedFile(dict, hashFilePath);
   }
 
-  public static void generateMD5() throws IOException, NoSuchAlgorithmException 
-  {    
+  public static void generateMD5() throws IOException, NoSuchAlgorithmException {
     String dirName = "dir_client";
     String dir = "D:\\" + dirName + "\\";
     String hashFilePath = "D:\\server\\MD5_file.ser";
@@ -59,7 +58,7 @@ public class GenerateMD5 {
     File directory = new File(dir);
     HashMap<String, String> dict = new HashMap<>();
     
-    
+    System.out.println("MD5 Hash Table ------------------------\n");
     if (directory.exists() && directory.isDirectory()) {
       String[] files = directory.list();
       if (files != null) {
@@ -72,6 +71,8 @@ public class GenerateMD5 {
             System.out.println(file + ": " + dict.get(file));
           }
         }
+        System.out.println("\n");
+
       } else {
         System.out.println("No files found in the directory.");
       }
@@ -82,7 +83,6 @@ public class GenerateMD5 {
     
     writeToSerializedFile(dict, hashFilePath);
   }
-
 
 
 

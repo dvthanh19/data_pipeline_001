@@ -92,8 +92,6 @@ public class CheckMD5 {
         }
 
 
-
-
       } else {
         System.out.println("No files found in the directory.");
       }
@@ -102,16 +100,15 @@ public class CheckMD5 {
     }
 
 
-    System.out.println("\n\n- Tracking ----------------------------");
-    for (String file : tracking.keySet()) 
-    {
-      System.out.println("<" + file + ">   " + tracking.get(file));
-    } 
+    // System.out.println("\n- Tracking ----------------------------");
+    // for (String file : tracking.keySet()) 
+    // {
+    //   System.out.println("<" + file + ">   " + tracking.get(file));
+    // } 
     writeToSerializedFile(tracking, trackFilePath);
   }
 
-  public static void checkMD5() throws IOException, NoSuchAlgorithmException 
-  {
+  public static void checkMD5() throws IOException, NoSuchAlgorithmException {
     String dirName = "dir_server";
     String checkPath = "D:\\" + dirName + "\\";
     String hashFilePath = "D:\\server\\MD5_file.ser";
@@ -139,13 +136,14 @@ public class CheckMD5 {
 
 
     // xy                   e.g: 00: untracked, 01: tracked and unchange
-    // x: 0: not change     1: added          2: removed        3: modified
+    // x: 0: not change     1: added          2: modified        3: removed
     // y: 0: untracked      1: tracked
     for (String key : loadedMap.keySet()) {
       tracking.put(key, "00");
     }
 
 
+    System.out.println("File status ---------------------------");
     if (dir.exists() && dir.isDirectory()) {
       String[] files = dir.list();
 
@@ -157,18 +155,18 @@ public class CheckMD5 {
             String refHash = loadedMap.get(file);
             // System.out.println(file + ": " + refHash);
             if (refHash == null){
-              tracking.put(file, "21");
-              System.out.println("File <" + file + "> was removed.");
+              tracking.put(file, "31");
+              System.out.println("File <" + file + "> was removed (" + tracking.get(file) + ") .");
             }
             else
             {
               if (!checkFileIntegrity(checkPath + file, refHash)) {
-                tracking.put(file, "31");
-                System.out.println("File <" + file + "> was modified.");
+                tracking.put(file, "21");
+                System.out.println("File <" + file + "> was modified (" + tracking.get(file) + ") .");
               }
               else {
                 tracking.put(file, "01");
-                System.out.println("File <" + file + "> is up to date.");
+                System.out.println("File <" + file + "> is up to date (" + tracking.get(file) + ") .");
               } 
             }
           }
@@ -176,14 +174,13 @@ public class CheckMD5 {
 
         for (String file : tracking.keySet()) 
         {
-          if ('0' == tracking.get(file).charAt(1))
+          if (tracking.get(file).charAt(1) == '0')
           {
             tracking.put(file, "11");
-            System.out.println("File <" + file + "> was added.");
+            System.out.println("File <" + file + "> was added (" + tracking.get(file) + ") .");
           } 
-        } 
+        }
 
-        
 
       } else {
         System.out.println("No files found in the directory.");
@@ -192,10 +189,14 @@ public class CheckMD5 {
       System.err.println("Error: Directory not found or not a directory: " + checkPath);
     }
 
-    
-    writeToSerializedFile(tracking, trackFilePath);    
-  }
 
+    // System.out.println("\n- Tracking ----------------------------");
+    // for (String file : tracking.keySet()) 
+    // {
+    //   System.out.println("<" + file + ">   " + tracking.get(file));
+    // } 
+    writeToSerializedFile(tracking, trackFilePath);
+  }
 
 
 
