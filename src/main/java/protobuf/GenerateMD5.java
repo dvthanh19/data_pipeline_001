@@ -58,7 +58,7 @@ public class GenerateMD5 {
     File directory = new File(dir);
     HashMap<String, String> dict = new HashMap<>();
     
-    System.out.println("MD5 Hash Table ------------------------\n");
+    System.out.println("MD5 Hash Table ------------------------");
     if (directory.exists() && directory.isDirectory()) {
       String[] files = directory.list();
       if (files != null) {

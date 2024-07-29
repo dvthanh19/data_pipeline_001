@@ -23,37 +23,105 @@ public class Main_flow {
 
 
 
+        System.out.println("\n------------------------------------------------------------------------------------");
+        System.out.println("File transmitting ------------------------------------------------------------------");
+        System.out.println("------------------------------------------------------------------------------------\n");
 
-        // System.out.println("\n\n------------------------------------------------------------------------------------");
-        // System.out.println("File transmitting ------------------------------------------------------------------");
-        // System.out.println("------------------------------------------------------------------------------------\n");
+        ComsumerThread consumerThread = new ComsumerThread();
+        ProducerThread producerThread = new ProducerThread();
 
-        // ComsumerThread consumerThread = new ComsumerThread();
-        // ProducerThread producerThread = new ProducerThread();
+        consumerThread.start();
+        try {
+            Thread.sleep(15000);
+        } catch (InterruptedException  e) {
+            e.printStackTrace();
+        }
+        producerThread.start();
 
-
-        // consumerThread.start();
-        // try {
-        //     Thread.sleep(15000);
-        // } catch (InterruptedException  e) {
-        //     e.printStackTrace();
-        // }
-        // producerThread.start();
-
-        // System.out.println("\n\n------------------------------------------------------------------------------------");
-        // System.out.println("MD5 processing ---------------------------------------------------------------------");
-        // System.out.println("------------------------------------------------------------------------------------\n");
+        try {
+            consumerThread.join();
+            producerThread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
 
-        // // Generate MD5
-        // try{GenerateMD5.generateMD5();}
-        // catch (NoSuchAlgorithmException e1) {e1.printStackTrace();}
-        // catch (IOException e2) {e2.printStackTrace();}
+        System.out.println("\n------------------------------------------------------------------------------------");
+        System.out.println("MD5 processing ---------------------------------------------------------------------");
+        System.out.println("------------------------------------------------------------------------------------\n");
 
-        // // Check MD5 between client and server
-        // try{CheckMD5.checkMD5();}
-        // catch (NoSuchAlgorithmException e1) {e1.printStackTrace();}
-        // catch (IOException e2) {e2.printStackTrace();}
+        // Generate MD5
+        try{GenerateMD5.generateMD5();}
+        catch (NoSuchAlgorithmException e1) {e1.printStackTrace();}
+        catch (IOException e2) {e2.printStackTrace();}
+
+        // Check MD5 between client and server
+        try{CheckMD5.checkMD5();}
+        catch (NoSuchAlgorithmException e1) {e1.printStackTrace();}
+        catch (IOException e2) {e2.printStackTrace();}
+
+    }
+
+
+    public static void  dir_processing()
+    {
+        System.out.println("------------------------------------------------------------------------------------");
+        System.out.println("MD5 processing ---------------------------------------------------------------------");
+        System.out.println("------------------------------------------------------------------------------------\n");
+
+        // Generate MD5
+        try{GenerateMD5.generateMD5();}
+        catch (NoSuchAlgorithmException e1) {e1.printStackTrace();}
+        catch (IOException e2) {e2.printStackTrace();}
+
+        // Check MD5 between client and server
+        try{CheckMD5.checkMD5();}
+        catch (NoSuchAlgorithmException e1) {e1.printStackTrace();}
+        catch (IOException e2) {e2.printStackTrace();}
+
+
+
+        System.out.println("\n------------------------------------------------------------------------------------");
+        System.out.println("File transmitting ------------------------------------------------------------------");
+        System.out.println("------------------------------------------------------------------------------------\n");
+
+
+        System.out.println("[Mainflow] ComsumerThread start");
+        ComsumerThread consumerThread = new ComsumerThread();
+
+        System.out.println("[Mainflow] ComsumerThread start");
+        ProducerThread producerThread = new ProducerThread();
+
+
+        consumerThread.start();
+        try {
+            Thread.sleep(15000);
+        } catch (InterruptedException  e) {
+            e.printStackTrace();
+        }
+        producerThread.start();
+
+        try {
+            consumerThread.join();
+            producerThread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+
+        System.out.println("\n------------------------------------------------------------------------------------");
+        System.out.println("MD5 processing ---------------------------------------------------------------------");
+        System.out.println("------------------------------------------------------------------------------------\n");
+
+        // Generate MD5
+        try{GenerateMD5.generateMD5();}
+        catch (NoSuchAlgorithmException e1) {e1.printStackTrace();}
+        catch (IOException e2) {e2.printStackTrace();}
+
+        // Check MD5 between client and server
+        try{CheckMD5.checkMD5();}
+        catch (NoSuchAlgorithmException e1) {e1.printStackTrace();}
+        catch (IOException e2) {e2.printStackTrace();}
 
     }
 }

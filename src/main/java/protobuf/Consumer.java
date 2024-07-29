@@ -1,12 +1,12 @@
 package protobuf;
 
-import protobuf.EmployeesOuterClass.Employees;
+// import protobuf.EmployeesOuterClass.Employees;
 import protobuf.FileSchema.*;
 import protobuf.GenerateMD5;
 
 import java.util.LinkedList;
-import java.util.Queue;
-
+import java.util.Set;
+import java.util.Iterator;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.File;
@@ -34,253 +34,45 @@ public class Consumer {
     private static HashMap<String, FileOutputStream> outputStreamMap = new HashMap<>();
 
 
-    public static void main(String[] args) throws IOException, NoSuchAlgorithmException{
-        // -------------------------------------------------------------------------------------------
-        // GET INFORMATION WHICH FILES ARE SENT ------------------------------------------------------
-        String trackFilePath = "D:\\server\\trackingFile.txt";
-        HashMap<String, String> trackFiles = null;
-        // Stack<String> unchangedFiles_stack = new Stack<>();
-        int stackSize = 0;
-        
-        try {trackFiles = readFromSerializedFile(trackFilePath);} 
-        catch (IOException e) 
-        {System.err.println("Error reading file: " + e.getMessage());} 
-        catch (ClassNotFoundException e)
-        {System.err.println("Error: Class not found during deserialization: " + e.getMessage());}
-
-
-        for (String file : trackFiles.keySet())
-            System.out.println("File <" + file + ">         " + trackFiles.get(file));
-            System.out.println("      -----------      ");
-
-        // Push all file with status [xy] with x!=1 and x!=2 (files are note added and modified) into stack
-        for (String file : trackFiles.keySet())
-            if (trackFiles.get(file).charAt(0) != '1' && trackFiles.get(file).charAt(0) != '2')
-                // unchangedFiles_stack.push(file);
-                trackFiles.remove(file);
-        
-        // Remove all file with status xy (x!=1) out of hashMap
-        // stackSize = unchangedFiles_stack.size();
-        // for (int i = 0; i < stackSize; i += 1)
-        //     trackFiles.remove(unchangedFiles_stack.pop());
-
-        for (String file : trackFiles.keySet())
-            System.out.println("File <" + file + ">         " + trackFiles.get(file));
-
-
-        // return ;
-
-        // -------------------------------------------------------------------------------------------
-        // INITIATION FOR EACH FILE ------------------------------------------------------------------
-
-        String dir = "D:\\dir_server\\"; 
-        HashMap<String, Long> chunknumMap = new HashMap<>();
-        HashMap<String, Long> countMap = new HashMap<>();
-        HashMap<String, Long> expectedChunkMap = new HashMap<>();
-        HashMap<String, Boolean> isFirstMap = new HashMap<>();
-        HashMap<String, Boolean> receiveMap = new HashMap<>();
-        boolean fun = true;
-        // FileOutputStream outputStream1 = new FileOutputStream(new File(dir + "test.txt"));
-        
-        for (String file : trackFiles.keySet())
-        {
-            File outputFile = new File(dir + file);
-            System.out.println(dir + file);
-
-            // Create outputStream for each file
-            try {
-                outputStreamMap.put(file, new FileOutputStream(outputFile));
-                // outputStreamMap.put(file, outputStream);
-                // outputStream1 = new FileOutputStream(outputFile);
-            } catch (IOException e) {e.printStackTrace();}
-
-            chunknumMap.put(file, (long) 0);
-            countMap.put(file, (long) 0);
-            expectedChunkMap.put(file, (long) 0);
-
-            isFirstMap.put(file, true);
-            receiveMap.put(file, false);
-
-            chunkListMap.put(file, new LinkedList<>());
-        }
-
-
-
-
-        // -------------------------------------------------------------------------------------------
-        // CREATE OUTPUTSTREAM FOR EACH FILE ---------------------------------------------------------
-        System.out.println("[Consumer] Starting...");
-
-
-        Properties props = new Properties();
-        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, BOOTSTRAP_SERVERS);
-        props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, ByteArrayDeserializer.class.getName());
-        props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, ByteArrayDeserializer.class.getName());
-        props.put(ConsumerConfig.GROUP_ID_CONFIG, "kafka-consumer");
-        props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "latest");
-        // props.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, false);
-
-        KafkaConsumer<Long, byte[]> consumer = new KafkaConsumer<>(props);
-        consumer.subscribe(Collections.singletonList(TOPIC_NAME));
-
-
-        String fileName;
-        while (true) {
-            // System.out.println("...1");
-            ConsumerRecords<Long, byte[]> records = consumer.poll(Duration.ofMillis(50));
-
-            if (fun) 
-            {
-                fun = false;
-                System.out.println("----------------- ... -----------------");
-            }
-        
-            for (ConsumerRecord<Long, byte[]> record : records) 
-            {
-                byte[] message = record.value();
-                Datachunk chunk = Datachunk.parseFrom(message);
-                fileName = chunk.getFileName() + chunk.getFileExt();
-
-                if (isFirstMap.get(fileName))
-                {
-                    chunknumMap.put(fileName, chunk.getChunkNum());
-                    isFirstMap.put(fileName, false);
-                }
-                
-
-                System.out.printf("Received message: offset = %d, partition = %d, message = %s\n",
-                        record.offset(), record.partition(), chunk);
-
-                if (expectedChunkMap.get(fileName) == Long.parseLong(chunk.getChunkID()))
-                {
-                    // System.out.println("... 1");
-                    countMap.put(fileName, countMap.get(fileName) + 1);
-                    outputStreamMap.get(fileName).write(chunk.getBody().toByteArray());
-                    // outputStream1.write(chunk.getBody().toByteArray());
-                    // System.out.println("... 2");
-                    expectedChunkMap.put(fileName, expectedChunkMap.get(fileName) + 1);
-                    
-
-                    if (chunkListMap.get(fileName).size() > 0)
-                    {
-                        Datachunk tmp = chunkListMap.get(fileName).getFirst();
-                        if (expectedChunkMap.get(fileName) == Long.parseLong(tmp.getChunkID()))
-                        {
-                            while (expectedChunkMap.get(fileName) == Long.parseLong(tmp.getChunkID()))
-                            {
-                                outputStreamMap.get(fileName).write(tmp.getBody().toByteArray());
-                                // outputStream1.write(tmp.getBody().toByteArray());
-                                chunkListMap.get(fileName).removeFirst();
-                                expectedChunkMap.put(fileName, expectedChunkMap.get(fileName) + 1);
-
-                                if (chunkListMap.get(fileName).size() > 0)
-                                {
-                                    tmp = chunkListMap.get(fileName).getFirst();
-                                }
-                            }
-                        }
-                    }
-                }
-                else
-                {
-                    // count += 1; //  ???
-                    boolean successFlag = addChunkIntoList(chunk, chunkListMap.get(fileName));
-                    if (successFlag == true){
-                        countMap.put(fileName, countMap.get(fileName) + 1); //  ???
-                    }
-                }
-                // System.out.println("count: " + countMap.get(fileName) + ",      expected: " + expectedChunkMap.get(fileName)  + ",      llsize: " + chunkListMap.get(fileName).size());
-                
-            }
-
-            int count = 0;
-
-            // Write the remaining chunks in linked list to file
-            // System.out.println("...2");
-            for (String file : trackFiles.keySet())
-            {   
-                if (!receiveMap.get(file))
-                {
-                    // System.out.println(chunknumMap.get(file) + "    " + countMap.get(file) + "    " + !isFirstMap.get(file));// ----
-                    if (chunknumMap.get(file) == countMap.get(file) && !isFirstMap.get(file)) {
-                        // System.out.println("... 2.2   " + chunknumMap.get(file));
-                        count += 1;
-                        
-
-                        System.out.println("Done receiving: " + String.valueOf(countMap.get(file)) + "/" + String.valueOf(chunknumMap.get(file)));
-        
-                        int listSize = chunkListMap.get(file).size();
-                        for (int i = 0; i < listSize; i += 1)
-                        {
-                            // System.out.println("... 2.3");
-                            expectedChunkMap.put(file, expectedChunkMap.get(file) + 1) ;
-                            Datachunk tmp = chunkListMap.get(file).getFirst();
-                            outputStreamMap.get(file).write(tmp.getBody().toByteArray());
-                            // outputStream1.write(tmp.getBody().toByteArray());
-        
-                            chunkListMap.get(file).removeFirst();
-                        }
-        
-                        // System.out.println("-- expected: " + expectedChunkMap.get(file));
-                        receiveMap.put(file, true);
-                    }
-                }
-                else {count += 1;}
-            }
-            // System.out.println("...3");
-
-            // System.out.println(count + "   " + trackFiles.size());
-            if (count == trackFiles.size()) break;
-        }
-
-
-        consumer.close();
-    }
-
-    public static void consume() throws IOException, NoSuchAlgorithmException{
-
+    public static void main(String[] args) throws IOException, NoSuchAlgorithmException
+    {
         System.out.println("[Consumer] Starting...");
 
         // -------------------------------------------------------------------------------------------
         // GET INFORMATION WHICH FILES ARE SENT ------------------------------------------------------
         String trackFilePath = "D:\\server\\trackingFile.txt";
-        HashMap<String, String> trackFiles = null;
+        HashMap<String, String> trackFiles_ = null;
         // Stack<String> unchangedFiles_stack = new Stack<>();
         // int stackSize = 0;
         
-
-        try {trackFiles = readFromSerializedFile(trackFilePath);} 
+        System.out.println("---1");
+        try {trackFiles_ = readFromSerializedFile(trackFilePath);} 
         catch (IOException e) 
         {System.err.println("Error reading file: " + e.getMessage());} 
         catch (ClassNotFoundException e)
         {System.err.println("Error: Class not found during deserialization: " + e.getMessage());}
-
-
-        // for (String file : trackFiles.keySet())
-        //     System.out.println("File <" + file + ">         " + trackFiles.get(file));
         
-        // System.out.println("I'm here 1* -------------");
-        
+        Iterator<String> iterator = trackFiles_.keySet().iterator();
+        System.out.println("---2");
+        while (iterator.hasNext()) {
+            String file = iterator.next();
+            String value = trackFiles_.get(file);
+            // System.out.println("--" + file);
             
-            
+            if (value.charAt(0) != '1' && value.charAt(0) != '2')
+                iterator.remove();
+        }
 
-        // Push all file with status [xy] with x!=1 and x!=2 (files are note added and modified) into stack
-        for (String file : trackFiles.keySet())
-            if (trackFiles.get(file).charAt(0) != '1' && trackFiles.get(file).charAt(0) != '2')
-                // unchangedFiles_stack.push(file);
-                trackFiles.remove(file);
+        System.out.println("---3");
+
+        if (trackFiles_.size() > 0)
+        {
+            System.out.println("---4");
         
-        // System.out.println("I'm here 1.1 -------------");
-        // Remove all file with status xy (x!=1) out of hashMap
-        // stackSize = unchangedFiles_stack.size();
-        // for (int i = 0; i < stackSize; i += 1)
-        //     trackFiles.remove(unchangedFiles_stack.pop());
         
-        for (String file : trackFiles.keySet())
-            System.out.println("File <" + file + ">         " + trackFiles.get(file));
-
-
-        // return ;
+        for (String file : trackFiles_.keySet())
+            System.out.println("File <" + file + ">         " + trackFiles_.get(file));
+        
 
         // -------------------------------------------------------------------------------------------
         // INITIATION FOR EACH FILE ------------------------------------------------------------------
@@ -297,7 +89,7 @@ public class Consumer {
         
 
         
-        for (String file : trackFiles.keySet())
+        for (String file : trackFiles_.keySet())
         {
             File outputFile = new File(dir + file);
             // System.out.println(dir + file);
@@ -414,7 +206,7 @@ public class Consumer {
 
             // Write the remaining chunks in linked list to file
             // System.out.println("...2");
-            for (String file : trackFiles.keySet())
+            for (String file : trackFiles_.keySet())
             {   
                 if (!receiveMap.get(file))
                 {
@@ -447,11 +239,227 @@ public class Consumer {
             // System.out.println("...3");
 
             // System.out.println(count + "   " + trackFiles.size());
-            if (count == trackFiles.size()) break;
+            if (count == trackFiles_.size()) break;
         }
 
 
         consumer.close();
+        }
+        System.out.println("---5");
+    }
+
+    public static void consume() throws IOException, NoSuchAlgorithmException
+    {
+        System.out.println("[Consumer] Starting...");
+
+        // -------------------------------------------------------------------------------------------
+        // GET INFORMATION WHICH FILES ARE SENT ------------------------------------------------------
+        String trackFilePath = "D:\\server\\trackingFile.txt";
+        HashMap<String, String> trackFiles_ = null;
+        // Stack<String> unchangedFiles_stack = new Stack<>();
+        // int stackSize = 0;
+        
+        System.out.println("---1");
+        try {trackFiles_ = readFromSerializedFile(trackFilePath);} 
+        catch (IOException e) 
+        {System.err.println("Error reading file: " + e.getMessage());} 
+        catch (ClassNotFoundException e)
+        {System.err.println("Error: Class not found during deserialization: " + e.getMessage());}
+        
+        Iterator<String> iterator = trackFiles_.keySet().iterator();
+        System.out.println("---2");
+        while (iterator.hasNext()) {
+            String file = iterator.next();
+            String value = trackFiles_.get(file);
+            // System.out.println("--" + file);
+            
+            if (value.charAt(0) != '1' && value.charAt(0) != '2')
+                iterator.remove();
+        }
+
+        System.out.println("---3");
+
+        if (trackFiles_.size() > 0)
+        {
+            System.out.println("---4");
+        
+        
+        for (String file : trackFiles_.keySet())
+            System.out.println("File <" + file + ">         " + trackFiles_.get(file));
+        
+
+        // -------------------------------------------------------------------------------------------
+        // INITIATION FOR EACH FILE ------------------------------------------------------------------
+
+        
+        String dir = "D:\\dir_server\\"; 
+        HashMap<String, Long> chunknumMap = new HashMap<>();
+        HashMap<String, Long> countMap = new HashMap<>();
+        HashMap<String, Long> expectedChunkMap = new HashMap<>();
+        HashMap<String, Boolean> isFirstMap = new HashMap<>();
+        HashMap<String, Boolean> receiveMap = new HashMap<>();
+        boolean fun = true;
+        // FileOutputStream outputStream1 = new FileOutputStream(new File(dir + "test.txt"));
+        
+
+        
+        for (String file : trackFiles_.keySet())
+        {
+            File outputFile = new File(dir + file);
+            // System.out.println(dir + file);
+
+            // Create outputStream for each file
+            try {
+                outputStreamMap.put(file, new FileOutputStream(outputFile));
+                // outputStreamMap.put(file, outputStream);
+                // outputStream1 = new FileOutputStream(outputFile);
+            } catch (IOException e) {e.printStackTrace();}
+
+            chunknumMap.put(file, (long) 0);
+            countMap.put(file, (long) 0);
+            expectedChunkMap.put(file, (long) 0);
+
+            isFirstMap.put(file, true);
+            receiveMap.put(file, false);
+
+            chunkListMap.put(file, new LinkedList<>());
+        }
+
+        // System.out.println("I'm here 2 -------------");
+
+
+        // -------------------------------------------------------------------------------------------
+        // CREATE OUTPUTSTREAM FOR EACH FILE ---------------------------------------------------------
+        System.out.println("[Consumer] Processing...");
+
+
+        Properties props = new Properties();
+        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, BOOTSTRAP_SERVERS);
+        props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, ByteArrayDeserializer.class.getName());
+        props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, ByteArrayDeserializer.class.getName());
+        props.put(ConsumerConfig.GROUP_ID_CONFIG, "kafka-consumer");
+        props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "latest");
+        // props.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, false);
+
+        KafkaConsumer<Long, byte[]> consumer = new KafkaConsumer<>(props);
+        consumer.subscribe(Collections.singletonList(TOPIC_NAME));
+
+        System.out.println("[Consumer] OutputStream Hashmap created succesfully");
+
+
+        String fileName;
+        while (true) {
+            // System.out.println("...1");
+            ConsumerRecords<Long, byte[]> records = consumer.poll(Duration.ofMillis(50));
+
+            if (fun) 
+            {
+                fun = false;
+                System.out.println("----------------- ... -----------------");
+            }
+        
+            for (ConsumerRecord<Long, byte[]> record : records) 
+            {
+                byte[] message = record.value();
+                Datachunk chunk = Datachunk.parseFrom(message);
+                fileName = chunk.getFileName() + chunk.getFileExt();
+
+                if (isFirstMap.get(fileName))
+                {
+                    chunknumMap.put(fileName, chunk.getChunkNum());
+                    isFirstMap.put(fileName, false);
+                }
+                
+
+                // System.out.printf("Received message: offset = %d, partition = %d, message = %s\n",
+                //         record.offset(), record.partition(), chunk);
+
+                if (expectedChunkMap.get(fileName) == Long.parseLong(chunk.getChunkID()))
+                {
+                    // System.out.println("... 1");
+                    countMap.put(fileName, countMap.get(fileName) + 1);
+                    outputStreamMap.get(fileName).write(chunk.getBody().toByteArray());
+                    // outputStream1.write(chunk.getBody().toByteArray());
+                    // System.out.println("... 2");
+                    expectedChunkMap.put(fileName, expectedChunkMap.get(fileName) + 1);
+                    
+
+                    if (chunkListMap.get(fileName).size() > 0)
+                    {
+                        Datachunk tmp = chunkListMap.get(fileName).getFirst();
+                        if (expectedChunkMap.get(fileName) == Long.parseLong(tmp.getChunkID()))
+                        {
+                            while (expectedChunkMap.get(fileName) == Long.parseLong(tmp.getChunkID()))
+                            {
+                                outputStreamMap.get(fileName).write(tmp.getBody().toByteArray());
+                                // outputStream1.write(tmp.getBody().toByteArray());
+                                chunkListMap.get(fileName).removeFirst();
+                                expectedChunkMap.put(fileName, expectedChunkMap.get(fileName) + 1);
+
+                                if (chunkListMap.get(fileName).size() > 0)
+                                {
+                                    tmp = chunkListMap.get(fileName).getFirst();
+                                }
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    // count += 1; //  ???
+                    boolean successFlag = addChunkIntoList(chunk, chunkListMap.get(fileName));
+                    if (successFlag == true){
+                        countMap.put(fileName, countMap.get(fileName) + 1); //  ???
+                    }
+                }
+                // System.out.println("count: " + countMap.get(fileName) + ",      expected: " + expectedChunkMap.get(fileName)  + ",      llsize: " + chunkListMap.get(fileName).size());
+                
+            }
+
+            int count = 0;
+
+            // Write the remaining chunks in linked list to file
+            // System.out.println("...2");
+            for (String file : trackFiles_.keySet())
+            {   
+                if (!receiveMap.get(file))
+                {
+                    // System.out.println(chunknumMap.get(file) + "    " + countMap.get(file) + "    " + !isFirstMap.get(file));// ----
+                    if (chunknumMap.get(file) == countMap.get(file) && !isFirstMap.get(file)) {
+                        // System.out.println("... 2.2   " + chunknumMap.get(file));
+                        count += 1;
+                        
+
+                        System.out.println("Done receiving: " + String.valueOf(countMap.get(file)) + "/" + String.valueOf(chunknumMap.get(file)));
+        
+                        int listSize = chunkListMap.get(file).size();
+                        for (int i = 0; i < listSize; i += 1)
+                        {
+                            // System.out.println("... 2.3");
+                            expectedChunkMap.put(file, expectedChunkMap.get(file) + 1) ;
+                            Datachunk tmp = chunkListMap.get(file).getFirst();
+                            outputStreamMap.get(file).write(tmp.getBody().toByteArray());
+                            // outputStream1.write(tmp.getBody().toByteArray());
+        
+                            chunkListMap.get(file).removeFirst();
+                        }
+        
+                        // System.out.println("-- expected: " + expectedChunkMap.get(file));
+                        receiveMap.put(file, true);
+                    }
+                }
+                else {count += 1;}
+            }
+            // System.out.println("...3");
+
+            // System.out.println(count + "   " + trackFiles.size());
+            if (count == trackFiles_.size()) break;
+        }
+
+
+        consumer.close();
+        }
+        System.out.println("---5");
     }
 
     
